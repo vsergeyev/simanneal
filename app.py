@@ -1,8 +1,22 @@
 import numpy as np
 
-from dimod import BinaryQuadraticModel
+import dimod
+from hybrid.reference.kerberos import KerberosSampler
 
 
-mat = np.array([])
+mat = np.array(
+    [[1.0,   50000,  50000,  1121.0, 1122.0, 1123.0, 1124.0, 1131.0, 1132.0, 1133.0],
+    [0,     2.0,    50000,  1221.0, 1222.0, 1223.0, 1224.0, 1231.0, 1232.0, 1233.0],
+    [0,     0,      3.0,    1321.0, 1322.0, 1323.0, 1324.0, 1331.0, 1332.0, 1333.0],
+    [0,     0,      0,      4.0,    50000,  50000,  50000,  2131.0, 2132.0, 2133.0],
+    [0,     0,      0,      0,      5.0,    50000,  50000,  2231.0, 2232.0, 2233.0],
+    [0,     0,      0,      0,      0,      6.0,    50000,  2331.0, 2332.0, 2333.0],
+    [0,     0,      0,      0,      0,      0,      7.0,    2431.0, 2432.0, 2433.0],
+    [0,     0,      0,      0,      0,      0,      0,      8.0,    50000,  50000 ],
+    [0,     0,      0,      0,      0,      0,      0,      0,      9.0,    50000 ],
+    [0,     0,      0,      0,      0,      0,      0,      0,      0,      10.0  ]]
+)
 
-bqm = BinaryQuadraticModel().from_numpy_matrix()
+bqm = dimod.BinaryQuadraticModel().from_numpy_matrix()
+solution = KerberosSampler().sample(bqm, max_iter=10, convergence=3)   
+print(solution.first.energy)
