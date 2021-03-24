@@ -1,7 +1,14 @@
+# D-Wave Leap access: https://cloud.dwavesys.com/leap/
+# 
+# Docs for QPU / Hybrid samplers
+# https://docs.ocean.dwavesys.com/projects/system/en/stable/reference/samplers.html#dwave.system.samplers.LeapHybridDQMSampler
+
 import numpy as np
 
 import dimod
 from hybrid.reference.kerberos import KerberosSampler
+from dwave.system import LeapHybridSampler
+from dwave.system import DWaveSampler
 
 
 mat = np.array(
@@ -44,7 +51,24 @@ solution2 = KerberosSampler().sample(bqm2, max_iter=10, convergence=3)
 print("Energy for mixed:", solution2.first.energy)
 print("Solution:", solution2.first)
 
-# > Leap IDE /workspace/simanneal $ /usr/local/bin/python /workspace/simanneal/app.py
+hybrid = LeapHybridSampler().sample(bqm2)
+print("[HYBRID] Energy for mixed:", hybrid.first.energy)
+print("[HYBRID] Solution:", hybrid.first)
+
+dwave = DWaveSampler().sample(bqm2)
+print("[DWAVE] Energy for mixed:", dwave.first.energy)
+print("[DWAVE] Solution:", dwave.first)
+
 # > Energy for all positive: 0.0
 # > Energy for mixed: -4124.0
 # > Solution: Sample(sample={(0, 0): 1, (0, 1): 0, (0, 2): 0, (1, 0): 0, (1, 1): 0, (1, 2): 0, (1, 3): 1, (2, 0): 0, (2, 1): 1, (2, 2): 0}, energy=-4124.0, num_occurrences=1)
+# > [HYBRID] Energy for mixed: -4124.0
+# > [HYBRID] Solution: Sample(sample={(0, 0): 1, (0, 1): 0, (0, 2): 0, (1, 0): 0, (1, 1): 0, (1, 2): 0, (1, 3): 1, (2, 0): 0, (2, 1): 1, (2, 2): 0}, energy=-4124.0, num_occurrences=1)
+# Traceback (most recent call last):
+#   File "/workspace/simanneal/app.py", line 53, in <module>
+#     dwave = DWaveSampler().sample(bqm2)
+#   File "/usr/local/lib/python3.7/site-packages/dwave/system/samplers/dwave_sampler.py", line 46, in wrapper
+#     return f(sampler, *args, **kwargs)
+#   File "/usr/local/lib/python3.7/site-packages/dwave/system/samplers/dwave_sampler.py", line 342, in sample
+#     raise BinaryQuadraticModelStructureError(msg)
+# dimod.exceptions.BinaryQuadraticModelStructureError: Problem graph incompatible with solver.
