@@ -3,6 +3,12 @@
 # Docs for QPU / Hybrid samplers
 # https://docs.ocean.dwavesys.com/projects/system/en/stable/reference/samplers.html#dwave.system.samplers.LeapHybridDQMSampler
 
+# pip install numpy
+# pip install dimod
+# pip install dwave-hybrid
+# pip install dwave-system
+
+
 import numpy as np
 
 import dimod
