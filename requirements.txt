@@ -1,0 +1,4 @@
+numpy
+dimod
+dwave-hybrid
+dwave-system
