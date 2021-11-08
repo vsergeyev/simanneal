@@ -1,5 +1,5 @@
-# Tutorial: D-Wave SA, QPU and Hybrid
-=========================================
+Tutorial: D-Wave SA, QPU and Hybrid
+===================================
 
 This small tutorial covers a usage of D-Wave Systems hardware
 for sampling protein design problem represented as QUBO.
@@ -12,8 +12,9 @@ To open this project in D-Wave Leap IDE use this link:
 
 Entry point is `app.py`.
 
-Energies representation
------------------------
+
+Protein Energies
+----------------
 
 Upper triangular matrix for aminoacids should be prepared before
 running D-Wave samplers.
